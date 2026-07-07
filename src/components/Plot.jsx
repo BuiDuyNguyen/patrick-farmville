@@ -1,5 +1,9 @@
-function Plot() {
-  return <div className="plot">🟫</div>;
+function Plot({ id }) {
+    return (
+        <div className="plot">
+            Plot {id}
+        </div>
+    );
 }
 
 export default Plot;
