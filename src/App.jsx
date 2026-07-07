@@ -1,10 +1,10 @@
-import Plot from "./components/Plot";
+import FarmGrid from "./components/FarmGrid";
 
 function App() {
   return (
     <div>
       <h1>Patrick Farmville</h1>
-      <Plot />
+      <FarmGrid />
     </div>
   );
 }
