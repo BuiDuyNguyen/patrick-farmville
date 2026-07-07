@@ -1,9 +1,11 @@
-function Plot({ id }) {
-    return (
-        <div className="plot">
-            Plot {id}
-        </div>
-    );
+function Plot({ id, status, crop }) {
+  return (
+    <div className="plot">
+      Plot {id}
+      <br />
+      {status}
+    </div>
+  );
 }
 
 export default Plot;
