@@ -1,0 +1,11 @@
+.farm-grid {
+  width: 500px;
+
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 10px;
+
+  margin: 0 auto;
+}

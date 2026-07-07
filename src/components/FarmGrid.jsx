@@ -1,4 +1,5 @@
 import Plot from "./Plot";
+import "./FarmGrid.css";
 
 function FarmGrid() {
 
@@ -8,7 +9,7 @@ function FarmGrid() {
     );
 
     return (
-        <div>
+        <div className="farm-grid"> 
             {plots.map((plotId) => (
                 <Plot
                     key={plotId}
