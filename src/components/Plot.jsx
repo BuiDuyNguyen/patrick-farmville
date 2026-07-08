@@ -1,12 +1,17 @@
-function Plot({ id, status, crop, onClick }) {
+function Plot({ plot, onPlotClick }) {
   return (
-    <div 
+    <div
       className="plot"
-      onClick={() => onClick(id)}
+      onClick={() => onPlotClick(plot.id)}
     >
-      Plot {id}
-      <br />
-      {status}
+      {plot.status === "empty" ? (
+        <span>Empty</span>
+      ) : (
+        <>
+          <div>🌱 {plot.crop}</div>
+          <div>{plot.status}</div>
+        </>
+      )}
     </div>
   );
 }
