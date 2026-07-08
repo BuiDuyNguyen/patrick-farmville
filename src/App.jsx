@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FarmGrid from "./components/FarmGrid";
 import "./App.css";
+import GoldPanel from "./components/GoldPanel";
 
 function App() {
   const [gold, setGold] = useState(100);
@@ -17,7 +18,7 @@ function App() {
     <div>
       <h1>Patrick Farmville</h1>
 
-      <p>Gold: {gold}</p>
+      <GoldPanel gold={gold} />
 
       <FarmGrid plots={plots} />
     </div>
