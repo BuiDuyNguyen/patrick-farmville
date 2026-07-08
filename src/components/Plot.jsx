@@ -1,6 +1,9 @@
-function Plot({ id, status, crop }) {
+function Plot({ id, status, crop, onClick }) {
   return (
-    <div className="plot">
+    <div 
+      className="plot"
+      onClick={() => onClick(id)}
+    >
       Plot {id}
       <br />
       {status}

@@ -14,13 +14,50 @@ function App() {
     }))
   );
 
+  function handlePlotClick(plotId) {
+    const selectedPlot = plots.find(
+      plot => plot.id === plotId
+    );
+
+    if (!selectedPlot) {
+      return;
+    }
+
+    if (selectedPlot.status !== "empty") {
+      return;
+    }
+
+    if (gold < 5) {
+      return;
+    }
+
+    setPlots(
+      plots.map((plot) => {
+        if (plot.id === plotId) {
+          return {
+            ...plot,
+            status: "planted",
+            crop: "Carrot",
+          };
+        }
+
+        return plot;
+      })
+    );
+
+    setGold(gold - 5);
+  }
+
   return (
     <div>
       <h1>Patrick Farmville</h1>
 
       <GoldPanel gold={gold} />
 
-      <FarmGrid plots={plots} />
+      <FarmGrid 
+        plots={plots}
+        onPlotClick={handlePlotClick}
+      />
     </div>
   );
 }

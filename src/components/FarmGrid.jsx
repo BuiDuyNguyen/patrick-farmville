@@ -1,7 +1,7 @@
 import Plot from "./Plot";
 import "./FarmGrid.css";
 
-function FarmGrid({ plots }) {
+function FarmGrid({ plots, onPlotClick }) {
   return (
     <div className="farm-grid">
       {plots.map((plot) => (
@@ -10,6 +10,7 @@ function FarmGrid({ plots }) {
           id={plot.id}
           status={plot.status}
           crop={plot.crop}
+          onClick = {onPlotClick}
         />
       ))}
     </div>
