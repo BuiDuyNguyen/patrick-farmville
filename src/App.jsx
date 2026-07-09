@@ -11,7 +11,7 @@ function App() {
     Array.from({ length: 25 }, (_, index) => ({
       id: index + 1,
       status: "empty",
-      crop: null,
+      cropId: null,
     }))
   );
 
@@ -19,6 +19,8 @@ function App() {
     const selectedPlot = plots.find(
       plot => plot.id === plotId
     );
+
+    const selectedCrop = crops[0];
 
     if (!selectedPlot) {
       return;
@@ -28,7 +30,7 @@ function App() {
       return;
     }
 
-    if (gold < 5) {
+    if (gold < selectedCrop.seedCost){
       return;
     }
 
@@ -38,7 +40,7 @@ function App() {
           return {
             ...plot,
             status: "planted",
-            crop: "Carrot",
+            cropId: selectedCrop.id,
           };
         }
 
@@ -46,7 +48,7 @@ function App() {
       })
     );
 
-    setGold(gold - 5);
+    setGold(gold - selectedCrop.seedCost);
   }
 
   return (
@@ -57,6 +59,7 @@ function App() {
 
       <FarmGrid 
         plots={plots}
+        crops={crops}
         onPlotClick={handlePlotClick}
       />
     </div>

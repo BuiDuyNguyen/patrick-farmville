@@ -1,4 +1,6 @@
-function Plot({ plot, onPlotClick }) {
+function Plot({ plot, crops, onPlotClick }) {
+  const crop = crops.find((crop) => crop.id === plot.cropId);
+
   return (
     <div
       className="plot"
@@ -8,7 +10,9 @@ function Plot({ plot, onPlotClick }) {
         <span>Empty</span>
       ) : (
         <>
-          <div>🌱 {plot.crop}</div>
+          <div>
+            {crop?.emoji} {crop?.name}
+          </div>
           <div>{plot.status}</div>
         </>
       )}

@@ -1,16 +1,15 @@
 import Plot from "./Plot";
 import "./FarmGrid.css";
 
-function FarmGrid({ plots, onPlotClick }) {
+function FarmGrid({ plots, crops, onPlotClick }) {
   return (
     <div className="farm-grid">
       {plots.map((plot) => (
         <Plot
           key={plot.id}
-          id={plot.id}
-          status={plot.status}
-          crop={plot.crop}
-          onClick = {onPlotClick}
+          plot={plot}
+          crops={crops}
+          onPlotClick={onPlotClick}
         />
       ))}
     </div>
