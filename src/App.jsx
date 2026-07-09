@@ -2,6 +2,7 @@ import { useState } from "react";
 import FarmGrid from "./components/FarmGrid";
 import "./App.css";
 import GoldPanel from "./components/GoldPanel";
+import { crops } from "./data/crops";
 
 function App() {
   const [gold, setGold] = useState(100);
