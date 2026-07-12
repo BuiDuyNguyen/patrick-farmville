@@ -1,12 +1,30 @@
-function Plot({ plot, crops, onPlotClick }) {
-  const crop = plot.cropId ? crops[plot.cropId] : null;
+function Plot({
+  plotData,
+  cropMaster,
+  onPlotClick,
+}) {
+  // Plot trống có cropId = null.
+  //
+  // Plot đã trồng sẽ dùng cropId để tra cứu
+  // dữ liệu cây từ Crop Master.
+  const cropData = plotData.cropId
+    ? cropMaster[plotData.cropId]
+    : null;
+
+  function handleClick() {
+    // Plot chỉ thông báo lên component cha:
+    // "Người chơi vừa click Plot có ID này."
+    //
+    // Business logic trồng cây vẫn được quản lý tại App.
+    onPlotClick(plotData.plotId);
+  }
 
   return (
     <button
       className="plot"
-      onClick={() => onPlotClick(plot.id)}
+      onClick={handleClick}
     >
-      {crop ? crop.cropName : "Empty"}
+      {cropData ? cropData.cropName : "Empty"}
     </button>
   );
 }
