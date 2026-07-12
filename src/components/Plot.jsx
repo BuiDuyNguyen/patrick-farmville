@@ -1,22 +1,13 @@
 function Plot({ plot, crops, onPlotClick }) {
-  const crop = crops.find((crop) => crop.id === plot.cropId);
+  const crop = plot.cropId ? crops[plot.cropId] : null;
 
   return (
-    <div
+    <button
       className="plot"
       onClick={() => onPlotClick(plot.id)}
     >
-      {plot.status === "empty" ? (
-        <span>Empty</span>
-      ) : (
-        <>
-          <div>
-            {crop?.emoji} {crop?.name}
-          </div>
-          <div>{plot.status}</div>
-        </>
-      )}
-    </div>
+      {crop ? crop.cropName : "Empty"}
+    </button>
   );
 }
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import FarmGrid from "./components/FarmGrid";
-import "./App.css";
 import GoldPanel from "./components/GoldPanel";
-import { crops } from "./data/crops";
+import { CROPS } from "./data/crops";
+import "./App.css";
 
 function App() {
   const [gold, setGold] = useState(100);
@@ -10,45 +10,64 @@ function App() {
   const [plots, setPlots] = useState(
     Array.from({ length: 25 }, (_, index) => ({
       id: index + 1,
-      status: "empty",
+
+      // Không lưu status.
+      // Status sẽ được suy diễn từ cropId, matureAt và thời gian hiện tại.
       cropId: null,
+      plantedAt: null,
+      matureAt: null,
     }))
   );
 
+  const [selectedCrop, setSelectedCrop] = useState("CARROT");
+
   function handlePlotClick(plotId) {
-    const selectedPlot = plots.find(
-      plot => plot.id === plotId
+    // Tìm Plot mà người chơi vừa click.
+    const clickedPlot = plots.find((plot) => plot.id === plotId);
+
+    // Nếu không tìm thấy Plot thì dừng để tránh lỗi.
+    if (!clickedPlot) {
+      return;
+    }
+
+    // Plot đã có cây thì không được trồng đè.
+    if (clickedPlot.cropId !== null) {
+      return;
+    }
+
+    // selectedCrop chỉ lưu cropId.
+    // Thông tin đầy đủ được tra từ Crop Master.
+    const crop = CROPS[selectedCrop];
+
+    // Nếu selectedCrop không tồn tại trong Crop Master thì dừng.
+    if (!crop) {
+      return;
+    }
+
+    // Gold bằng đúng giá mua vẫn được phép trồng.
+    if (gold < crop.cropBuyPrice) {
+      return;
+    }
+
+    const plantedAt = Date.now();
+
+    // growthTime dùng giây, Date.now() dùng milliseconds.
+    const matureAt = plantedAt + crop.growthTime * 1000;
+
+    setPlots((currentPlots) =>
+      currentPlots.map((plot) =>
+        plot.id === plotId
+          ? {
+              ...plot,
+              cropId: crop.cropId,
+              plantedAt,
+              matureAt,
+            }
+          : plot
+      )
     );
 
-    const selectedCrop = crops[0];
-
-    if (!selectedPlot) {
-      return;
-    }
-
-    if (selectedPlot.status !== "empty") {
-      return;
-    }
-
-    if (gold < selectedCrop.seedCost){
-      return;
-    }
-
-    setPlots(
-      plots.map((plot) => {
-        if (plot.id === plotId) {
-          return {
-            ...plot,
-            status: "planted",
-            cropId: selectedCrop.id,
-          };
-        }
-
-        return plot;
-      })
-    );
-
-    setGold(gold - selectedCrop.seedCost);
+    setGold((currentGold) => currentGold - crop.cropBuyPrice);
   }
 
   return (
@@ -57,9 +76,9 @@ function App() {
 
       <GoldPanel gold={gold} />
 
-      <FarmGrid 
+      <FarmGrid
         plots={plots}
-        crops={crops}
+        crops={CROPS}
         onPlotClick={handlePlotClick}
       />
     </div>
