@@ -14,5 +14,22 @@ export const CROPS = {
     // Tạm dùng 10 giây để dễ kiểm thử gameplay.
     // Đơn vị được thống nhất là giây.
     growthTime: 10,
+    emoji: "🥕",
+  },
+  CORN: {
+    cropId: "CORN",
+    cropName: "Corn",
+    cropBuyPrice: 10,
+    cropSellPrice: 16,
+    growthTime: 20,
+    emoji: "🌽",
+  },
+  TOMATO: {
+    cropId: "TOMATO",
+    cropName: "Tomato",
+    cropBuyPrice: 15,
+    cropSellPrice: 25,
+    growthTime: 30,
+    emoji: "🍅",
   },
 };

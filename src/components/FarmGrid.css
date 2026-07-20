@@ -1,11 +1,10 @@
-.farm-grid {
-  width: 500px;
-
-  display: grid;
-
-  grid-template-columns: repeat(5, 1fr);
-
-  gap: 10px;
-
-  margin: 0 auto;
-}
+.farm-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(6px, 1.5vw, 12px); padding: clamp(12px, 3vw, 24px); background: #82ad55; border: 8px solid #6d843b; border-radius: 24px; box-shadow: 0 14px 0 #4d652d, 0 22px 40px rgba(52,75,29,.25); }
+.plot { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 4px; color: #fff8df; background: #755039; border: 0; border-radius: 16px; box-shadow: inset 0 -8px 0 rgba(55,30,18,.25), 0 4px 0 #4f3728; cursor: pointer; transition: transform .15s, filter .15s; }
+.plot:hover { filter: brightness(1.08); transform: translateY(-2px); }
+.plot:active { transform: translateY(2px); }
+.plot-icon { font-size: clamp(1.4rem, 5vw, 2.75rem); line-height: 1; }
+.plot-label { font-size: clamp(.58rem, 1.8vw, .82rem); font-weight: 800; }
+.plot.planted { background: #80583b; }
+.plot.ready { color: #273b14; background: #d9e879; box-shadow: inset 0 -8px 0 rgba(93,118,31,.2), 0 4px 0 #79933b; animation: ready-pulse 1.4s ease-in-out infinite; }
+@keyframes ready-pulse { 50% { filter: brightness(1.12); transform: translateY(-3px); } }
+@media (max-width: 500px) { .farm-grid { border-width: 5px; border-radius: 16px; } .plot { border-radius: 9px; } }
